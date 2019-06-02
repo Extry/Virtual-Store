@@ -3,12 +3,12 @@
 class Products extends Model
 {
 
-	public function getList()
+	public function getList($offset = 0, $limit = 3)
 	{
-		$sql = $this->pdo->query('SELECT *,
+		$sql = $this->pdo->query("SELECT *,
 			( select brands.name from brands where brands.id = products.id_brand ) as brand_name,
 			( select categories.name from categories where categories.id = products.id_category ) as category_name
-			FROM products');
+			FROM products LIMIT $offset, $limit");
 		if($sql->rowCount() > 0){
 			$array = $sql->fetchAll();
 			foreach ($array as $key => $item) {
@@ -20,7 +20,12 @@ class Products extends Model
 		}
 		return $array;
 	}
-
+	public function getTotal()
+	{
+		$sql = $this->pdo->query('SELECT COUNT(*) as c FROM products');
+		$sql = $sql->fetch();
+		return $sql['c'];
+	}
 
 	public function getImagesByProductId($id)
 	{
@@ -34,4 +39,3 @@ class Products extends Model
 	}
 
 }
-
