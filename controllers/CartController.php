@@ -85,10 +85,7 @@ class CartController extends Controller
 			$_SESSION['cart'][$id]++;
 
 		}
-		if($_SESSION['cart'][$id] == 0){
-			unset($_SESSION['cart'][$id]);
-
-		}
+		
 		header("Location: ".BASE_URL."cart");
 		exit;
 	}
