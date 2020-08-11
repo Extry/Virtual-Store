@@ -1,6 +1,7 @@
 <div class="product_item">
-	<a href="<?php echo BASE_URL; ?>">
+	<a href="<?php echo BASE_URL; ?>product/open/<?php echo $id; ?>">
 		<div class="product_tags">
+			
 			<?php if ($sale == 1):?>
 				<div class="product_tag  product_tag_red"><?php echo $this->lang->get('SALE'); ?></div>
 			<?php endif; ?>
@@ -23,8 +24,8 @@
 				echo 'R$ '.number_format($price_from, 2, ',', '.');
 			}?>
 
-			</div>
-			<div class="product_price">R$ <?php echo number_format($price, 2, ',', '.'); ?></div>
-			<div style="clear:both"></div>
-		</a>
-	</div>
+		</div>
+		<div class="product_price">R$ <?php echo number_format($price, 2, ',', '.'); ?></div>
+		<div style="clear:both"></div>
+	</a>
+</div>
