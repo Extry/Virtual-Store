@@ -1,30 +1,30 @@
-<div class="product_item">
-	<a href="<?php echo BASE_URL; ?>">
-		<div class="product_tags">
-			<?php if ($sale == 1):?>
-				<div class="product_tag  product_tag_red"><?php echo $this->lang->get('SALE'); ?></div>
-			<?php endif; ?>
-			<?php if ($bestseller == 1): ?>
-				<div class="product_tag product_tag_green"><?php echo $this->lang->get('BESTSELLER'); ?></div>
-			<?php endif; ?>
-			<?php if ($new_product == 1): ?>
-				<div class="product_tag product_tag_blue"><?php echo $this->lang->get('NEW'); ?></div>
-			<?php endif; ?>
+<div class="row">
+	<?php 
+	$a = 0;
 
+	
+	foreach ($list as $product_item): ?>
+		<div class="col-sm-4">
+			<?php $this->loadView('product_item', $product_item); ?>
 		</div>
-		<div class="product_image">
-			<img src="<?php echo BASE_URL; ?>media/products/<?php echo $images[0]['url']; ?>" width="100%">
-		</div>
-		<div class="product_name"><?php echo $name;?> </div>
-		<div class="product_brand"><?php echo $brand_name; ?> </div>
-		<div class="product_price_from">
-			<?php 
-			if($price_from != 0){
-				echo 'R$ '.number_format($price_from, 2, ',', '.');
-			}?>
-
-			</div>
-			<div class="product_price">R$ <?php echo number_format($price, 2, ',', '.'); ?></div>
-			<div style="clear:both"></div>
-		</a>
-	</div>
+		
+		<?php 
+		if($a >= 2){
+			$a = 0;
+			echo '</div><div class="row">';
+		}else   {
+			$a++;
+		}
+	endforeach;
+	?>	
+</div>
+<div class="paginationArea">
+	<?php for ($q=1; $q <=$number ; $q++):  ?>
+		<div class="paginationitem <?php echo ($currentPage==$q)?'pag_active':''; ?>"><a href="<?php echo BASE_URL; ?>? <?php 
+           $pag_array = $_GET;
+           $pag_array['p'] = $q;
+           echo http_build_query($pag_array);
+ 
+		 ?>"><?php echo $q; ?></a></div>
+	<?php endfor; ?>
+</div>
